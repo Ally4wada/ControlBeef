@@ -14,7 +14,7 @@ cep char(9)
 
 insert into Endereco (logradouro, bairro, numero, cep) values 
 ('Rua das Flores', 'Centro', '123', '12345-678'),
-('Avenida Brasil', 'Jardim das Rosas', '456', '98765-432');
+('Avenida Brasil', 'Jardim das Rosas', '456', '98765-433');
 
 select * from Endereco;
 
@@ -46,8 +46,8 @@ foreign key (fkEmpresa) references Empresa(idEmpresa)
 );
 
 insert into Funcionario values
-(null, 'Felipe','11939005850', 'felipe@gmail.com', '12345678', 'Analista Senior', 1),
-(null, 'Gustavo','11998019050', 'gustavo@outlook.com', '123456789', 'Analista Junior', 1),
+(null, 'Felipe','11939005850', 'felipe@gmail.com', '12345678', 'Analista - Senior', 1),
+(null, 'Gustavo','11998019050', 'gustavo@outlook.com', '123456789', 'Analista - Junior', 1),
 (null, 'Eduardo','11939005850', 'eduardo@hotmail.com', '123456', 'Gestor', 1);
 
 select * from Funcionario;
