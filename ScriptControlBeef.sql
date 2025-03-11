@@ -13,7 +13,7 @@ cep char(9)
 );
 
 insert into Endereco (logradouro, bairro, numero, cep) values 
-('Rua das Flores', 'Centro', '123', '12345-678'),
+('Rua das Flores', 'Centro', '321', '12345-678'),
 ('Avenida Brasil', 'Jardim das Rosas', '456', '98765-433');
 
 select * from Endereco;
