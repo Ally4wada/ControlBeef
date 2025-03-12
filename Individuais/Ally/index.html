@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Economia - Control Beef</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: #fff;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        h2 {
+            color: #d32f2f;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #d32f2f;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        #div_resultado {
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            background: #ffebee;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h2>Simulador de Economia - Control Beef</h2>
+        <p>Temperatura da câmara fria (°C):</p>
+        <input type="number" id="ipt_temperatura" placeholder="Ex: 3">
+        <p>Valor do estoque (R$):</p>
+        <input type="number" id="ipt_estoque" placeholder="Ex: 500000">
+        <button onclick="calcularEconomia()">Calcular Economia</button>
+        <div id="div_resultado"></div>
+    </div>
+
+    <script>
+        function calcularEconomia() {
+            var temperatura = Number(ipt_temperatura.value);
+            var estoque = Number(ipt_estoque.value);
+            var perdaPercentual;
+
+            if (temperatura < -2) {
+                perdaPercentual = 5;
+            } else if (temperatura <= 2) {
+                perdaPercentual = 2;
+            } else if (temperatura <= 4) {
+                perdaPercentual = 10;
+            } else {
+                perdaPercentual = 15;
+            }
+
+            var perdaFinanceira = (estoque * perdaPercentual) / 100;
+            var economiaComControlBeef = perdaFinanceira / 2;
+
+            div_resultado.innerHTML =
+                `<p>Perda financeira estimada: R$ ${perdaFinanceira.toFixed(2)}</p>
+                 <p>Economia com Control Beef: R$ ${economiaComControlBeef.toFixed(2)}</p>`;
+        }
+    </script>
+</body>
+</html>

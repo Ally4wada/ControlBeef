@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container-pai-pai {
+            text-align: center;
+            height: max-content;
+            background-color: #bee7ff50;
+            gap: 2rem;
+        }
+
+        .container-pai {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 2rem;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 500px;
+            gap: 2rem;
+
+        }
+
+        #div_resp {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 500px;
+        }
+
+        .container-inad {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .container-inad::before {
+            content: "";
+            border: 1px solid #9AD8FD;
+            width: 300px;
+            align-self: center;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #85cffa;
+            background-color: #5DD7ED;
+        }
+
+        button:hover {
+            background-color: rgb(62, 181, 250);
+            cursor: pointer;
+        }
+
+        span {
+            color: gray;
+        }
+
+        #div_resp {
+            gap: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container-pai-pai">
+    <H1>Calcule a sua possível perda</H1>
+        <div class="container-pai">
+            <div class="container">
+                <input type="text" id="ipt_carneInfo" placeholder="Insira a carne do lote...">
+                <input type="number" id="ipt_carneQnt" placeholder="Insira a quantidade de carne (kg)...">
+                <input type="number" id="ipt_precoV" placeholder="Insira o preço de venda da carne...">
+                <input type="number" id="ipt_precoC" placeholder="Insira o preço pelo qual foi comprado a carne...">
+                <div class="container-inad">
+                    <input type="number" id="ipt_temp" placeholder="Insira a temperatura que a carne ficou...">
+                    <input type="number" id="ipt_hora" placeholder="Insira a quantidade de horas que a carne ficou nessa temperatura...">
+                </div>
+                <button onclick="Calcular()">Calcular perda</button>
+            </div>
+            <div id="div_resp"><span>Esperando dados...</span></div>
+        </div>
+    </div>
+</body>
+
+<script>
+    var lucroPerda = lucro * perda
+    var lucroAfetado = lucro - lucroPerda
+    var perda = 0;
+    var lucro = 0
+
+    function Calcular() {
+
+        var carne = (ipt_carneInfo.value)
+        var carneQnt = Number(ipt_carneQnt.value)
+        var temperatura = Number(ipt_temp.value)
+        var horas = Number(ipt_hora.value)
+        var vendas = Number(ipt_precoV.value)
+        var compras = Number(ipt_precoC.value)
+        lucro = (carneQnt * vendas) - (carneQnt * compras)
+        // Máxima temperatura segura 4ºC
+        // Mínima temperatura segura -3 para refrigeração, dps ela congela
+        if (temperatura >= -3) {
+            if (temperatura <= 4) {
+                div_resp.innerHTML = `<p>O lote de ${carne} não sofrerá perdas dentro de 12 meses</p>`
+            }
+            else {
+            console.log(horas)
+            if (horas >= 0) {
+                if (horas <= 2) {
+                    var tempoRest = 2 - horas
+                    perda = 0
+                    div_resp.innerHTML = ` <p>O lote de ${carne} não sofrerá perdas dentro de ${tempoRest} horas</p>`
+                } else if (horas <= 4) {
+                    perda = 0.02
+                } else if (horas <= 8) {
+                    perda = 0.1
+                } else if (horas <= 12) {
+                    perda = 0.2
+                } else if (horas <= 24) {
+                    perda = 0.35
+                } else {
+                    perda = 0.5
+                }
+
+                if (perda > 0 ){
+                    lucroPerda = lucro * perda
+                    console.log(lucro)
+                    lucroAfetado = lucro - lucroPerda
+                    console.log(lucroAfetado)
+
+                    div_resp.innerHTML = `<p>Você perderá R$${lucroPerda}.</p>`
+
+                    if (perda === 0.5) {
+                        div_resp.innerHTML += `<br> <p>
+                            O lote de ${carne} poderá ir para processamento ou
+                            apenas descartado dependendo da situação
+                        </p>`;
+                    }
+                    div_resp.innerHTML += `<br><button id="botaoDiv" onclick="VerMais()">Ver Mais</button>`
+                }
+            }
+        }
+        } else if (temperatura < -3) {
+            if (horas >= 0) {
+                if (horas <= 11) {
+                    var tempoRest = 12 - horas
+                    perda = 0
+                    div_resp.innerHTML = `<p>O lote de ${carne} não sofrerá perdas dentro de ${tempoRest} horas</p>`
+                } else if (horas <= 23) {
+                    perda = 0.03
+                } else if (horas <= 47) {
+                    perda = 0.07
+                } else {
+                    perda = 0.15
+                    div_resp.innerHTML = `<p>O lote de ${carne} poderá ir para o uso industrial (imbutidos ou moída)</p>`
+                }
+                if (perda > 0 ){
+                    lucroPerda = lucro * perda
+                    lucroAfetado = lucro - lucroPerda
+                    div_resp.innerHTML = `<p>Você perderá R$${lucroPerda}.</p>`
+
+                    if (perda === 0.15) {
+                        div_resp.innerHTML += `<br><p>O lote de ${carne} poderá ir para o uso industrial (embutidos ou moída)</p>`;
+                    }
+
+                    div_resp.innerHTML += `<br><button id="botaoDiv" onclick="VerMais()">Ver Mais</button>`
+                }
+            }
+        }
+    }
+
+    function VerMais() {
+        var carne = (ipt_carneInfo.value)
+        var carneQnt = Number(ipt_carneQnt.value)
+        var temperatura = Number(ipt_temp.value)
+        var horas = Number(ipt_hora.value)
+        var vendas = Number(ipt_precoV.value)
+        var compras = Number(ipt_precoC.value)
+
+        lucro = (carneQnt * vendas) - (carneQnt * compras)
+
+        botaoDiv.style.display = "none";
+
+        div_resp.innerHTML += "<div style='border: 1px solid #9AD8FD; width: 300px; align-self: center;'><div/>"
+
+        div_resp.innerHTML += `<p>
+            A carne ficou exposta a uma temperatura de ${temperatura}°C por ${horas} horas.
+                        De acordo com o tempo fora da temperatura segura (que normalmente é de -3 a 4°C),
+                        aplicamos uma taxa de deterioração de ${perda * 100}%.
+                        Isso resultou em uma perda estimada de R$${lucroPerda} no lucro total do lote, que seria de ${lucro}.
+        </p>`
+
+    }
+</script>
+
+</html>

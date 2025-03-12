@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Perda de Carne</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f1e4;
+            color: #5a5a5a;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff3e0;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #d3c1a5;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ffb74d;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #ff9800;
+        }
+        h2 {
+            color: #bf360c;
+        }
+        h3 {
+            margin-bottom: 5px;
+            color: #6d4c41;
+        }
+        #div_resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #d84315;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Perda de Carne</h2>
+        <h3>Temperatura Ideal (°C):</h3>
+        <input type="number" id="ipt_Ideal" placeholder="Ex: -1">
+        
+        <h3>Temperatura Real (°C):</h3>
+        <input type="number" id="ipt_Real" placeholder="Ex: 6">
+        
+        <h3>Tempo de Exposição (dias):</h3>
+        <input type="number" id="ipt_tempo" placeholder="Ex: 5">
+        
+        <h3>Peso Inicial da Carne (kg):</h3>
+        <input type="number" id="ipt_peso" placeholder="Ex: 100">
+        
+        <h3>Valor do Quilo da Carne (R$):</h3>
+        <input type="number" id="ipt_valor" placeholder="Ex: 80">
+        
+        <h3>Tipo de Corte:Opções Carne Sem Osso, Carne Com Osso, Carne Moída e Miúdos. </h3>
+        <input type="text" id="ipt_carne" placeholder="Ex: Miúdos">
+        <!-- <select id="sel_corte">
+            <option value="0.007">Carne Sem Osso</option>
+            <option value="0.005">Carne Com Osso</option>
+            <option value="0.010">Carne Moída</option>
+            <option value="0.012">Miúdos</option>
+        </select> -->
+        
+        <button onclick="calcularPerda()">Calcular</button>
+        <div id="div_resultado"></div>
+    </div>
+
+    <script>
+        function calcularPerda() {
+            var tempIdeal = Number (ipt_Ideal.value);
+            var tempReal = Number (ipt_Real.value);
+            var tempo = Number (ipt_tempo.value);
+            var pesoInicial = Number (ipt_peso.value);
+            var valorQuilo = Number (ipt_valor.value);
+            var k = ipt_carne.value;
+            
+            if (k == 'Carne Sem Osso'){
+                var k = 0.007;
+            }
+            if (k == 'Carne Com Osso'){
+                var k = 0.005;
+            }
+            if (k == 'Carne Moída'){
+                var k = 0.01;
+            }
+            if (k == 'Miúdos'){
+                var k = 0.012;
+            }
+
+            var perdaPercentual = k * (tempReal - tempIdeal) * tempo;
+            var pesoPerdido = pesoInicial * perdaPercentual;
+            var perdaFinanceira = pesoPerdido * valorQuilo;
+            
+            div_resultado.innerHTML = `Perda de Peso: ${pesoPerdido.toFixed(2)} kg<br>
+                Prejuízo Financeiro: R$ ${perdaFinanceira.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
