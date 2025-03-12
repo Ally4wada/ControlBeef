@@ -267,31 +267,7 @@ insert into Alerta (tipoAlerta, statusAlerta, dtHoraAlerta, fkSensor) values
 
 select * from Alerta;
 
--- Consulta que mostra o id do dado e qual foi a temperatura e a data/hora que foi registrada essa temperatura, qual foi o sensor que capturou esse dado e em qual sala ele estava, qual o id do frigorifico dessa
--- sala e informacoes desse frigorifico como tipo e capacidade, qual a empresa dona desse frigorifico com informacoes dessa empresa e qual o endereco dessa empresa.
-select 
-    ds.idDado as 'ID do Dado',
-    ds.tempRegistrada as 'Temperatura Registrada',
-    ds.dtHoraTemperatura as 'Data Hora Temperatura',
-    s.idSensor as 'ID Sensor',
-    s.fkSala as 'Sala do Sensor',
-    f.idFrigorifico as 'ID Frigorífico',
-    f.tipoFrigorifico as 'Tipo de Frigorífico',
-    f.capacidadeTotalKilos as 'Capacidade Total Frigorífico (Kilos)',
-    e.idEmpresa as 'ID Empresa',
-    e.nomeFantasia as 'Nome Fantasia Empresa',
-    e.email as 'Email Empresa',
-    en.idEndereco as 'ID Endereço Empresa',
-    en.logradouro as 'Logradouro Endereço',
-    en.bairro as 'Bairro Endereço',
-    en.numero as 'Número Endereço',
-    en.cep as 'CEP Endereço'
-from DadosSensor as ds
-join Sensor as s on ds.fkSensor = s.idSensor
-join Sala as sa on s.fkSala = sa.idSala
-join Frigorifico as f on sa.fkFrigorifico = f.idFrigorifico
-join Empresa as e on f.fkEmpresa = e.idEmpresa
-join Endereco as en ON e.fkEndereco = en.idEndereco;
+
 
 
 
