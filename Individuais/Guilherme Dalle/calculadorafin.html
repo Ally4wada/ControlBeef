@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora financeira</title>
+</head>
+
+<body>
+  <input placeholder="Insira o nome da carne" id="id_carne" type="text"><br><br>
+  <input placeholder="Insira a qunatidade de Kg" id="id_carnekg" type="number"><br><br>
+  <input placeholder="Preço de compra da carne" id="id_preçocompra" type="number"><br><br>
+  <input placeholder="Preço de venda da carne" id="id_preçovenda" type="number"><br><br>
+  <input placeholder="Insira a temperatura" id="id_temperatura" type="number"><br><br>
+  <input placeholder="Quantidades de horas" id="id_horas" type="number"><br><br>
+  <button onclick="calculo()">Calcular</button><br><br>
+  <div id="div_temperatura"></div>
+  <div id="div_resp"></div>
+  <div id="div_lote"></div>
+</body>
+
+</html>
+<script>
+  function calculo() {
+
+    var carne = (id_carne.value)
+    var pesocarne = Number(id_carnekg.value)
+    var compra = Number(id_preçocompra.value)
+    var venda = Number(id_preçovenda.value)
+    var temp = Number(id_temperatura.value)
+    var horas = Number(id_horas.value)
+    var lucro = (pesocarne * venda) - (pesocarne * compra)
+    var tempoRest = 0
+
+    if (temp >= -3 && temp <= 4) {
+      div_temperatura.innerHTML = `O lote de ${carne} não sofrerá perdas dentro de 12 meses.`;
+    } else if (temp < -3) {
+      if (horas >= 0) {
+        if (horas <= 11) {
+          tempoRest = 12 - horas
+          perda = 0
+          div_resp.innerHTML = `O lote de ${carne} não sofrerá perdas dentro de ${tempoRest} horas.`
+        } else if (horas <= 23) {
+          perda = 0.03
+        } else if (horas <= 47) {
+          perda = 0.07
+        } else {
+          perda = 0.15
+          div_resp.innerHTML = `O lote de ${carne} poderá ir para o uso industrial (imbutidos ou moída).`
+        }
+        if (perda > 0) {
+          lucroPerda = lucro * perda
+          lucroAfetado = lucro - lucroPerda
+          div_resp.innerHTML = `Você perderá R$${lucroPerda}.`
+        }
+        if (perda === 0.15) {
+          div_resp.innerHTML += `O lote de ${carne} poderá ir para o uso industrial (embutidos ou moída).`;
+        }
+      }
+    } else {
+      if (horas >= 0) {
+        if (horas <= 2) {
+          var temprest = 2 - horas
+          var perda = 0
+          div_temperatura.innerHTML = `O lote de ${carne} não sofrerá perdas dentro de ${temprest} horas.`;
+        } else if (horas <= 4) {
+          perda = 0.02
+        } else if (horas <= 8) {
+          perda = 0.1
+        } else if (horas <= 12) {
+          perda = 0.2
+        } else if (horas <= 24) {
+          perda = 0.35
+        } else {
+          perda = 0.5
+        }
+
+        if (perda > 0) {
+          lucroPerda = lucro * perda
+          lucroAfetado = lucro - lucroPerda
+          div_lote.innerHTML = `Você perderá R$${lucroPerda}.`
+
+          if (perda === 0.5) {
+            div_lote.innerHTML += `O lote de ${carne} poderá ir para processamento ou apenas descartado dependendo da situação.`;
+          }
+        }
+      }
+    }
+
+  }
+</script>
