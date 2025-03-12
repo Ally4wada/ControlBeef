@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira - Frigorífico</title>
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to bottom, #e6f7ff, #f4f9fc);
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .header {
+        width: 95%;
+        height: 5%;
+        margin: 0 auto;
+        background: linear-gradient(to right, #007bff, #66c2ff, #007bff);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 30px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header img {
+        height: 21vh;
+        width: 22vw;
+        margin-left: -10vw;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+        text-decoration: underline;
+    }
+
+    .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        gap: 30px;
+        padding-top: 60px;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 24, 162, 0.841);
+        width: 40vw;
+        margin-left: 35vw;
+        text-align: left;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .moved {
+        transform: translateX(-320px);
+    }
+
+    .resultado-box {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 24, 162, 0.841);
+        width: 30vw;
+        margin-right: 10vw;
+        text-align: left;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .show {
+        opacity: 1;
+    }
+
+    input {
+        width: 90%;
+        padding: 12px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .button1 {
+        padding: 12px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.3s;
+        margin-left: 10.5vw;
+    }
+
+    .button2 {
+        padding: 12px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.3s;
+        margin-left: 7.5vw;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+</style>
+
+<body>
+
+    <header class="header">
+        <img src="logo.png" alt="Logo">
+        <nav class="nav-links">
+            <a href="#">Calculadora</a>
+            <a href="#">Login</a>
+            <a href="#">Cadastro</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="container" id="calcContainer">
+            <h2>Calculadora de Perdas - Frigorífico</h2>
+            <div class="carne" id="carne">
+                <input type="text" class="nome" id="ipt_nome" placeholder="Nome da Carne">
+                <input type="number" class="quantidade" id="ipt_quantidade" placeholder="Quantidade (kg)">
+                <input type="number" class="preco" id="ipt_preco" placeholder="Preço por kg">
+                <button class="button1" onclick="adicionarCarne()">+</button>
+            </div>            
+            <br>
+            <input type="number" id="ipt_temperatura" placeholder="Temperatura registrada">
+            <input type="number" id="ipt_horas" placeholder="Horas na temperatura inadequada">
+            <br><br>
+            <button class="button2" onclick="calcularPerda()">Calcular Perda</button>
+        </div>
+
+        <div id="resultadoBox" class="resultado-box">
+            <h2>Resultado</h2>
+            <div id="resultado"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function adicionarCarne() {
+        var divNova = document.createElement("div");
+        divNova.classList.add("carne");
+        divNova.innerHTML = '<input type="text" class="nome" placeholder="Nome da Carne">' +
+            '<input type="number" class="quantidade" placeholder="Quantidade (kg)">' +
+            '<input type="number" class="preco" placeholder="Preço por kg">' +
+            '<button onclick="adicionarCarne()">+</button>';
+        carne.appendChild(divNova);
+    }
+
+    function calcularPerda() {
+        var totalKgPerdido = 0;
+        var totalDinheiroPerdido = 0;
+        var percentualPerda = 0;
+
+        var horas = Number(ipt_horas.value);
+        var temperatura = Number(ipt_temperatura.value);
+
+        if (temperatura > 4) {
+            if (horas > 0 && horas <= 2) percentualPerda = 0;
+            else if (horas > 2 && horas <= 4) percentualPerda = 0.02;
+            else if (horas > 4 && horas <= 8) percentualPerda = 0.10;
+            else if (horas > 8 && horas <= 12) percentualPerda = 0.20;
+            else if (horas > 12 && horas <= 24) percentualPerda = 0.35;
+            else if (horas > 24) percentualPerda = 0.50;
+        } else if (temperatura < -3) {
+            if (horas > 0 && horas <= 11) percentualPerda = 0;
+            else if (horas > 11 && horas <= 23) percentualPerda = 0.03;
+            else if (horas > 24 && horas <= 48) percentualPerda = 0.07;
+            else if (horas > 48) percentualPerda = 0.15;
+        }
+
+        var resultadoHtml = '';
+        var carnes = document.querySelectorAll('.carne');
+        console.log(carnes);
+
+        for (var i = 0; i < carnes.length; i++) {
+            var nome = carnes[i].querySelector('.nome').value;
+            var qtd = Number(carnes[i].querySelector('.quantidade').value);
+            var preco = Number(carnes[i].querySelector('.preco').value);
+
+            if (nome && qtd > 0 && preco > 0) {
+                var perdaKg = qtd * percentualPerda;
+                var perdaDinheiro = perdaKg * preco;
+
+                resultadoHtml += `<p><strong>${nome}</strong>: Perda de ${perdaKg.toFixed(2)} kg - R$ ${perdaDinheiro.toFixed(2)}</p>`;
+
+                totalKgPerdido += perdaKg;
+                totalDinheiroPerdido += perdaDinheiro;
+            }
+        }
+
+        resultadoHtml += `<hr><p><strong>Total:</strong> Perda de ${totalKgPerdido.toFixed(2)} kg - R$ ${totalDinheiroPerdido.toFixed(2)}</p>`;
+
+        resultado.innerHTML = resultadoHtml;
+        calcContainer.classList.add("moved");
+        resultadoBox.classList.add("show");
+    }
+
+
+
+</script>
