@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             margin: 0;
             padding: 0;
         }
+
         .container {
             background: #fff;
             max-width: 500px;
@@ -19,9 +21,11 @@
             padding: 30px;
             border-radius: 10px;
         }
+
         h2 {
             color: #d32f2f;
         }
+
         input {
             width: 100%;
             padding: 10px;
@@ -30,6 +34,7 @@
             border-radius: 5px;
             font-size: 16px;
         }
+
         button {
             background-color: #d32f2f;
             color: #fff;
@@ -40,9 +45,11 @@
             cursor: pointer;
             transition: background 0.3s;
         }
+
         button:hover {
             background-color: #b71c1c;
         }
+
         #div_resultado {
             font-weight: bold;
             margin-top: 20px;
@@ -51,13 +58,15 @@
             border-radius: 5px;
         }
     </style>
-
 </head>
+
 <body>
     <div class="container">
         <h2>Simulador de Economia - Control Beef</h2>
         <p>Temperatura da câmara fria (°C):</p>
         <input type="number" id="ipt_temperatura" placeholder="Ex: 3">
+        <p>Tempo fora da temperatura segura (horas):</p>
+        <input type="number" id="ipt_tempo" placeholder="Ex: 5">
         <p>Valor do estoque (R$):</p>
         <input type="number" id="ipt_estoque" placeholder="Ex: 500000">
         <button onclick="calcularEconomia()">Calcular Economia</button>
@@ -67,26 +76,49 @@
     <script>
         function calcularEconomia() {
             var temperatura = Number(ipt_temperatura.value);
+            var horas = Number(ipt_tempo.value);
             var estoque = Number(ipt_estoque.value);
-            var perdaPercentual;
+            var perda = 0;
 
-            if (temperatura < -2) {
-                perdaPercentual = 5;
-            } else if (temperatura <= 2) {
-                perdaPercentual = 2;
-            } else if (temperatura <= 4) {
-                perdaPercentual = 10;
-            } else {
-                perdaPercentual = 15;
+            if (temperatura >= -3 && temperatura <= 4) {
+                div_resultado.innerHTML = `<p>O estoque não sofrerá perdas dentro de 12 meses.</p>`;
+                return;
             }
 
-            var perdaFinanceira = (estoque * perdaPercentual) / 100;
+            if (temperatura > 4) {
+                if (horas <= 2) {
+                    perda = 0;
+                } else if (horas <= 4) {
+                    perda = 0.02;
+                } else if (horas <= 8) {
+                    perda = 0.1;
+                } else if (horas <= 12) {
+                    perda = 0.2;
+                } else if (horas <= 24) {
+                    perda = 0.35;
+                } else {
+                    perda = 0.5;
+                }
+            } else if (temperatura < -3) {
+                if (horas <= 2) {
+                    perda = 0;
+                } else if (horas <= 23) {
+                    perda = 0.03;
+                } else if (horas <= 47) {
+                    perda = 0.07;
+                } else {
+                    perda = 0.15;
+                }
+            }
+
+            var perdaFinanceira = estoque * perda;
             var economiaComControlBeef = perdaFinanceira / 2;
 
-            div_resultado.innerHTML =
-                `<p>Perda financeira estimada: R$ ${perdaFinanceira.toFixed(2)}</p>
-                 <p>Economia com Control Beef: R$ ${economiaComControlBeef.toFixed(2)}</p>`;
+            div_resultado.innerHTML = `
+                <p>Perda financeira estimada: R$ ${perdaFinanceira.toFixed(2)}</p>
+                <p>Economia com Control Beef: R$ ${economiaComControlBeef.toFixed(2)}</p>`;
         }
     </script>
 </body>
+
 </html>
