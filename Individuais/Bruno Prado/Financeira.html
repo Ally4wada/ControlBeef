@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Perda de Carne</title>
     <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -55,30 +62,24 @@
 </head>
 <body>
     <div class="container">
-        <h2>Calculadora de Perda de Carne</h2>
-        <h3>Temperatura Ideal (°C):</h3>
+        <h2>Calculadora de Perda de Carne</h2> <br>
+        <p>Temperatura Ideal (°C):</p>
         <input type="number" id="ipt_Ideal" placeholder="Ex: -1">
         
-        <h3>Temperatura Real (°C):</h3>
+        <p>Temperatura Real (°C):</p>
         <input type="number" id="ipt_Real" placeholder="Ex: 6">
         
-        <h3>Tempo de Exposição (dias):</h3>
+        <p>Tempo de Exposição (dias):</p>
         <input type="number" id="ipt_tempo" placeholder="Ex: 5">
         
-        <h3>Peso Inicial da Carne (kg):</h3>
+        <p>Peso Inicial da Carne (kg):</p>
         <input type="number" id="ipt_peso" placeholder="Ex: 100">
         
-        <h3>Valor do Quilo da Carne (R$):</h3>
+        <p>Valor do Quilo da Carne (R$):</p>
         <input type="number" id="ipt_valor" placeholder="Ex: 80">
         
-        <h3>Tipo de Corte:Opções Carne Sem Osso, Carne Com Osso, Carne Moída e Miúdos. </h3>
+        <p>Tipo de Corte: <br >Opções Carne Sem Osso, Carne Com Osso, Carne Moída e Miúdos. </p>
         <input type="text" id="ipt_carne" placeholder="Ex: Miúdos">
-        <!-- <select id="sel_corte">
-            <option value="0.007">Carne Sem Osso</option>
-            <option value="0.005">Carne Com Osso</option>
-            <option value="0.010">Carne Moída</option>
-            <option value="0.012">Miúdos</option>
-        </select> -->
         
         <button onclick="calcularPerda()">Calcular</button>
         <div id="div_resultado"></div>
@@ -112,6 +113,10 @@
             
             div_resultado.innerHTML = `Perda de Peso: ${pesoPerdido.toFixed(2)} kg<br>
                 Prejuízo Financeiro: R$ ${perdaFinanceira.toFixed(2)}`;
+
+            if (tempo <= 0 || pesoInicial <= 0 || valorQuilo <= 0) {
+                div_resultado.innerHTML = `Valores inválidos!`
+            }
         }
     </script>
 </body>
