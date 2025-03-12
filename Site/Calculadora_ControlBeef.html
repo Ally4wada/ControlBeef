@@ -5,163 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
-    <style>
-        /* Importando fontes do Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-        /* Resetando estilos padrões para garantir um layout consistente */
-        * {
-            margin: 0;
-            /* Remove margens padrão */
-            padding: 0;
-            /* Remove espaçamentos padrão */
-            box-sizing: border-box;
-            /* Faz com que o padding e a borda sejam incluídos no tamanho total do elemento */
-            font-family: "Montserrat", sans-serif;
-            /* Define a fonte padrão */
-        }
-
-        /* Container principal */
-        .container-pai-pai {
-            text-align: center;
-            /* Centraliza o texto dentro do container */
-            height: max-content;
-            /* Ajusta a altura ao conteúdo */
-            background-color: #bee7ff50;
-            /* Define uma cor de fundo */
-            gap: 2rem;
-            /* Define um espaçamento entre os elementos */
-        }
-
-        /* Alinhando a calculadora ao centro da tela */
-        .container-pai {
-            display: flex;
-            /* Ativa o flexbox para alinhamento (modo mais eficiente para criar layout) */
-            justify-content: center;
-            /* Centraliza os elementos horizontalmente */
-            align-items: center;
-            /* Centraliza os elementos verticalmente */
-            height: 100vh;
-            /* Ocupa toda a altura da tela */
-            gap: 2rem;
-            /* Espaçamento entre os elementos */
-        }
-
-        /* Estilizando a div da calculadora */
-        .container {
-            display: flex;
-            /* Ativa o flexbox */
-            flex-direction: column;
-            /* Organiza os elementos em coluna */
-            background: white;
-            /* Define o fundo branco */
-            padding: 20px;
-            /* Adiciona espaçamento interno */
-            border-radius: 10px;
-            /* Arredonda as bordas */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            /* Adiciona sombra ao redor */
-            text-align: center;
-            /* Centraliza o texto */
-            width: 500px;
-            /* Define a largura fixa */
-            gap: 1.5rem;
-            /* Espaçamento entre os elementos internos */
-        }
-
-        /* Estilizando a caixa de resposta */
-        #div_resp {
-            display: flex;
-            /* Ativa o flexbox */
-            flex-direction: column;
-            /* Organiza os elementos em coluna */
-            background: white;
-            /* Define o fundo branco */
-            padding: 20px;
-            /* Adiciona espaçamento interno */
-            border-radius: 10px;
-            /* Arredonda as bordas */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            /* Adiciona sombra ao redor */
-            text-align: center;
-            /* Centraliza o texto */
-            width: 500px;
-            /* Define uma largura fixa */
-        }
-
-        /* Estilizando a div da calculadora */
-        .container-inad {
-            display: flex;
-            /* Ativa o flexbox */
-            flex-direction: column;
-            /* Organiza os elementos em coluna */
-            gap: 1.5rem;
-            /* Espaçamento entre os elementos internos */
-        }
-
-        /* Criando uma barra azul antes da div */
-        .container-inad::before {
-            content: "";
-            /* Conteúdo vazio, necessário para existir visualmente */
-            border: 1px solid #9AD8FD;
-            /* Cria uma borda azul */
-            width: 300px;
-            /* Define a largura da linha */
-            align-self: center;
-            /* Centraliza a linha horizontalmente */
-        }
-
-        /* Estilizando título h1 */
-        h1 {
-            font-family: "Jura", sans-serif;
-            /* Define a fonte específica */
-            font-weight: bold;
-            /* Deixa o texto em negrito */
-        }
-
-        /* Estilizando input de entrada */
-        input {
-            padding: 10px;
-            /* Adiciona espaçamento interno */
-            border-radius: 5px;
-            /* Arredonda as bordas */
-            border: 1px solid gray;
-            /* Adiciona uma borda cinza */
-        }
-
-        /* Estilizando botão */
-        button {
-            padding: 10px;
-            /* Adiciona espaçamento interno */
-            border-radius: 5px;
-            /* Arredonda as bordas */
-            border: 1px solid #85cffa;
-            /* Adiciona uma borda azul clara */
-            background-color: #5DD7ED;
-            /* Define a cor de fundo azul */
-        }
-
-        /* Mudando a aparência ao passar o mouse sobre o botão */
-        button:hover {
-            background-color: rgb(62, 181, 250);
-            /* Muda a cor de fundo */
-            cursor: pointer;
-            /* Muda o cursor para indicar clique */
-        }
-
-        /* Estilizando elementos span */
-        span {
-            color: gray;
-            /* Define a cor do texto */
-        }
-
-        /* Adicionando espaçamento na resposta */
-        #div_resp {
-            gap: 10px;
-            /* Adiciona espaçamento entre os elementos */
-        }
-    </style>
 </head>
 
 <body>
@@ -169,18 +12,18 @@
         <H1>Calcule a sua possível perda</H1>
         <div class="container-pai">
             <div class="container">
-                <input type="text" id="ipt_carneInfo" placeholder="Insira a carne do lote...">
-                <input type="number" id="ipt_carneQnt" placeholder="Insira a quantidade de carne (kg)...">
-                <input type="number" id="ipt_precoV" placeholder="Insira o preço de venda da carne...">
-                <input type="number" id="ipt_precoC" placeholder="Insira o preço pelo qual foi comprado a carne...">
+                <input type="text" id="ipt_carneInfo" placeholder="Insira a carne do lote..."> <br><br>
+                <input type="number" id="ipt_carneQnt" placeholder="Insira a quantidade de carne (kg)..."> <br><br>
+                <input type="number" id="ipt_precoV" placeholder="Insira o preço de venda da carne..."> <br><br>
+                <input type="number" id="ipt_precoC" placeholder="Insira o preço pelo qual foi comprado a carne..."> <br><br>
                 <div class="container-inad">
-                    <input type="number" id="ipt_temp" placeholder="Insira a temperatura que a carne ficou...">
+                    <input type="number" id="ipt_temp" placeholder="Insira a temperatura que a carne ficou..."> <br><br>
                     <input type="number" id="ipt_hora"
-                        placeholder="Insira a quantidade de horas que a carne ficou nessa temperatura...">
+                        placeholder="Insira a quantidade de horas que a carne ficou nessa temperatura..."> <br><br>
                 </div>
-                <button onclick="Calcular()">Calcular perda</button>
+                <button onclick="Calcular()">Calcular perda</button> <br><br>
             </div>
-            <div id="div_resp"><span>Esperando dados...</span></div>
+            <div id="div_resp" style="background-color: #f9f9f9;"><span>Esperando dados...</span></div> 
         </div>
     </div>
 </body>
@@ -227,16 +70,16 @@
                 lucroPerda = lucro * perda
                 lucroAfetado = lucro - lucroPerda
 
-                div_resp.innerHTML = `<p>Você perderá R$${lucroPerda.toFixed(2)}.</p>`
+                div_resp.innerHTML = `<p><b>Você perderá R$${lucroPerda.toFixed(2)}.</b></p>`
 
                 if (perda === 0.5) {
-                    div_resp.innerHTML += `<br> <p>
+                    div_resp.innerHTML += `<p>
                         O lote de ${carne} poderá ir para processamento ou
                         apenas será descartado dependendo da situação
-                    </p>`;
+                        </p>`;
                 }
 
-                div_resp.innerHTML += `<br><button id="botaoDiv" onclick="VerMais()">Ver Mais</button>`
+                div_resp.innerHTML += `<button id="botaoDiv" onclick="VerMais()">Ver Mais</button>`
             }
         } else if (temperatura < -3) {
             if (horas >= 0 && horas <= 2) {
@@ -255,13 +98,13 @@
             if (perda > 0) {
                 lucroPerda = lucro * perda
                 lucroAfetado = lucro - lucroPerda
-                div_resp.innerHTML = `<p>Você perderá R$${lucroPerda.toFixed(2)}.</p>`
+                div_resp.innerHTML = `<p><b>Você perderá R$${lucroPerda.toFixed(2)}.</b></p>`
 
                 if (perda === 0.15) {
-                    div_resp.innerHTML += `<br><p>O lote de ${carne} poderá ir para o uso industrial (embutidos ou moída)</p>`;
+                    div_resp.innerHTML += `<p>O lote de ${carne} poderá ir para o uso industrial (embutidos ou moída)</p>`;
                 }
 
-                div_resp.innerHTML += `<br><button id="botaoDiv" onclick="VerMais()">Ver Mais</button>`
+                div_resp.innerHTML += `<button id="botaoDiv" onclick="VerMais()">Ver Mais</button>`
             }
         }
     }
@@ -278,8 +121,6 @@
 
         // alterando o style da div "botaoDiv" -> ela vai para o display: "none", ou seja, some.
         botaoDiv.style.display = "none";
-
-        div_resp.innerHTML += "<div style='border: 1px solid #9AD8FD; width: 300px; align-self: center;'><div/>"
 
         div_resp.innerHTML += `
     <p style="text-align: justify; line-height: 1.6;">
