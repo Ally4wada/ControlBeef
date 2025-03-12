@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+
+        * {
+            font-family: "Open+Sans", sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            background: whitesmoke;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 500px;
+        }
+
+        span {
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="container">
+            <p>Qual o tipo de corte?</p>
+            <input placeholder="insira o nome" type="text" id="ipt_peca">
+            <p>Qual a quantidade de carne?</p>
+            <input placeholder="insira o valor em quilos" type="number" id="ipt_qnt">
+            <p>Qual o preço do quilo?</p>
+            <input placeholder="insira o valor em reais" type="number" id="ipt_preco_compra">
+            <p>Em qual temperatura a carne ficou armazenada?</p>
+            <input placeholder="insira o valor em celsius" type="number" id="ipt_temperatura">
+            <p>Quantas horas a carne ficou nessa temperatura?</p>
+            <input placeholder="insira o valor em horas" type="number" id="ipt_horas"><br><br>
+            <button onclick="calculo()">Calcular Perda</button>
+            <div id="div_frigorifico"></div>
+        </div>
+    </center>
+</body>
+<script>
+    function calculo() {
+        var nome = ipt_peca.value;
+        var quantidade = Number(ipt_qnt.value);
+        var valorQuilo = Number(ipt_preco_compra.value);
+        var temperatura = Number(ipt_temperatura.value);
+        var hora = Number(ipt_horas.value);
+        var temperaturaAcimaIdeal = temperatura >= 5;
+        var temperaturaAbaixoIdeal = temperatura <= -4;
+        var temperaturaIdeal = temperatura <= 4 && temperatura >= -3;
+        var carnePerdida = 0;
+        var perdaFinanceira = 0;
+
+        if (nome === "" || quantidade < 0 || quantidade === "" || valorQuilo === "" || valorQuilo <= 0) {
+            div_frigorifico.innerHTML = `<span><b><br>Todos os campos devem ser preenchidos corretamente! Por favor, insira valores válidos em todos os campos.</b><br></span>`;
+            return;
+        }
+
+        if (temperaturaAcimaIdeal) {
+            if (hora <= -1) {
+                div_frigorifico.innerHTML = `<b><br>Horário inválido!</b>`
+            }
+            else if (hora <= 2) {
+                div_frigorifico.innerHTML = `<b>A temperatura atual de armazenamento da carne não está dentro dos parâmetros ideais. Para evitar perdas e garantir a qualidade do produto, é essencial ajustar a temperatura imediatamente para níveis adequados. Ações corretivas urgentes são necessárias para evitar danos e prejuízos financeiros.</b>`
+            }
+            else if (hora <= 4) {
+                carnePerdida = quantidade * 0.02
+                perdaFinanceira = carnePerdida * valorQuilo
+                div_frigorifico.innerHTML = `<br>Com o armazenamento inadequado por <span><b>${hora}</b></span> horas, houve uma perda de <span><b>2%</b></span> da ${nome} armazenada. A carne perdida totalizou <span><b>${carnePerdida.toFixed(2)}</b></span> quilos, resultando em um prejuízo financeiro de R$ <span><b>${perdaFinanceira.toFixed(2)}</b></span>.`
+            }
+            else if (hora <= 8) {
+                carnePerdida = quantidade * 0.1
+                perdaFinanceira = carnePerdida * valorQuilo
+                div_frigorifico.innerHTML = `<br>Com o armazenamento inadequado por <span><b>${hora}</b></span> horas, houve uma perda de <span><b>10%</b></span> da ${nome} armazenada. A carne perdida totalizou <span><b>${carnePerdida.toFixed(2)}</b></span> quilos, resultando em um prejuízo financeiro de R$ <span><b>${perdaFinanceira.toFixed(2)}</b></span>.`
+            }
+            else if (hora <= 12) {
+                carnePerdida = quantidade * 0.2
+                perdaFinanceira = carnePerdida * valorQuilo
+                div_frigorifico.innerHTML = `<br>Com o armazenamento inadequado por <span><b>${hora}</b></span> horas, houve uma perda de <span><b>20%</b></span> da ${nome} armazenada. A carne perdida totalizou <span><b>${carnePerdida.toFixed(2)}</b></span> quilos, resultando em um prejuízo financeiro de R$ <span><b>${perdaFinanceira.toFixed(2)}</b></span>.`
+            }
+            else if (hora <= 24) {
+                carnePerdida = quantidade * 0.35
+                perdaFinanceira = carnePerdida * valorQuilo
+                div_frigorifico.innerHTML = `<br>Com o armazenamento inadequado por <span><b>${hora}</b></span> horas, houve uma perda de <span><b>35%</b></span> da ${nome} armazenada. A carne perdida totalizou <span><b>${carnePerdida.toFixed(2)}</b></span> quilos, resultando em um prejuízo financeiro de R$ <span><b>${perdaFinanceira.toFixed(2)}</b></span>.`
+            }
+            else {
+                carnePerdida = quantidade * 0.5
+                perdaFinanceira = carnePerdida * valorQuilo
+                div_frigorifico.innerHTML = `<br>Com o armazenamento inadequado por <span><b>${hora}</b></span> horas, houve uma perda de <span><b>50%</b></span> da ${nome} armazenada. A carne perdida totalizou <span><b>${carnePerdida.toFixed(2)}</b></span> quilos, resultando em um prejuízo financeiro de R$ <span><b>${perdaFinanceira.toFixed(2)}</b></span>.`
+            }
+        }
+        if (temperaturaAbaixoIdeal) {
+            if (hora <= -1) {
+                div_frigorifico.innerHTML = `<b><br>Horário inválido!</b>`
+            }
+            else if (hora <= 11) {
+                div_frigorifico.innerHTML = `<b>A temperatura atual de armazenamento da carne não está dentro dos parâmetros ideais. Para evitar perdas e garantir a qualidade do produto, é essencial ajustar a temperatura imediatamente para níveis adequados. Ações corretivas urgentes são necessárias para evitar danos e prejuízos financeiros.</b>`
+            }
+            else if (hora <= 23) {
+                carnePerdida = quantidade * 0.03
+                perdaFinanceira = carnePerdida * valorQuilo
+                div_frigorifico.innerHTML = `<br>Com o armazenamento inadequado por <span><b>${hora}</b></span> horas, houve uma perda de <span><b>3%</b></span> da ${nome} armazenada. A carne perdida totalizou <span><b>${carnePerdida.toFixed(2)}</b></span> quilos, resultando em um prejuízo financeiro de R$ <span><b>${perdaFinanceira.toFixed(2)}</b></span>.`
+            }
+            else if (hora <= 48) {
+                carnePerdida = quantidade * 0.07
+                perdaFinanceira = carnePerdida * valorQuilo
+                div_frigorifico.innerHTML = `<br>Com o armazenamento inadequado por <span><b>${hora}</b></span> horas, houve uma perda de <span><b>7%</b></span> da ${nome} armazenada. A carne perdida totalizou <span><b>${carnePerdida.toFixed(2)}</b></span> quilos, resultando em um prejuízo financeiro de R$ <span><b>${perdaFinanceira.toFixed(2)}</b></span>.`
+            }
+            else {
+                carnePerdida = quantidade * 0.15
+                perdaFinanceira = carnePerdida * valorQuilo
+                div_frigorifico.innerHTML = `<br>Com o armazenamento inadequado por <span><b>${hora}</b></span> horas, houve uma perda de <span><b>15%</b></span> da ${nome} armazenada. A carne perdida totalizou <span><b>${carnePerdida.toFixed(2)}</b></span> quilos, resultando em um prejuízo financeiro de R$ <span><b>${perdaFinanceira.toFixed(2)}</b></span>.`
+            }
+        }
+        if (temperaturaIdeal) {
+            div_frigorifico.innerHTML = `<b>Devido ao armazenamento adequado da carne em temperaturas ideais, não houve qualquer perda de produto. A carne foi preservada com qualidade, sem comprometer o valor financeiro, garantindo que não houve perdas e o processo de armazenamento foi realizado de forma eficiente e segura.</b>`
+        }
+    }
+</script>
+
+</html>
