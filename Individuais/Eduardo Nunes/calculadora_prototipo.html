@@ -258,7 +258,7 @@
             }
 
             if (perda === 0.15) {
-                div_resp.innerHTML += `<p><b><p>O lote de ${carne} poderá ir para o uso industrial (imbutidos ou moída)</p></b> <br>`;
+                div_resp.innerHTML += `<p><b><p>O lote de ${carne} poderá ir para o uso industrial (embutidos ou moída)</p></b> <br>`;
             }
 
             div_resp.innerHTML += `<button id="botaoDiv" onclick="VerMais()">Ver Mais</button>`;
@@ -276,7 +276,7 @@
 
         lucro = (carneQnt * vendas) - (carneQnt * compras);
         lucroPerda = lucro - lucroAfetado
-        
+
         if (perda === 0.5) {
             lucroPerda = custoCompra;  // Prejuízo total é o custo de compra
             lucro = 0;  // Não há mais lucro
@@ -295,7 +295,7 @@
                 aplicamos uma taxa de deterioração de <b>${perda * 100}%</b>.<br><br>
 
                 ${perda === 0.5 ? `Devido à deterioração extrema, o lote não poderá ser vendido,
-                resultando em uma perda total de <b>R$${lucroPerda.toFixed(2)}</b>, equivalente ao valor de compra do lote.` 
+                resultando em uma perda total de <b>R$${lucroPerda.toFixed(2)}</b>, equivalente ao valor de compra do lote.`
                 : `Isso significa que a carne perderá <b>${perda * 100}%</b> de seu valor de venda por peça.<br><br>
                 Como resultado, a perda estimada no lucro total do lote será de <b>R$${lucroAfetado.toFixed(2)}</b>,
                  considerando que o lucro original seria de <b>R$${lucro.toFixed(2)}</b>.<br>
