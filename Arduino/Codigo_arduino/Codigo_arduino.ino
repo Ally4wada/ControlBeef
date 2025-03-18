@@ -1,5 +1,5 @@
 // Definição da entrada analogica como A0.
-const int PINO_SENSOR_TEMPERATURA = A0; 
+const int PINO_SENSOR_TEMPERATURA = A2; 
 
 // Definição da variavel como float para capturar o valor da temperatura, onde o valor tem casas depois da virgula.
 float temperaturaCelsius;
